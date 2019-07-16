@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name = "java-antProject" default = "run">
+	<taskdef resource="com/puppycrawl/tools/checkstyle/ant/checkstyle-ant-task.properties"
+         classpath="./test/checkstyle-8.22-all.jar"/>
 	<target name= "run" depends="compile">
 		<java classname = "AntProject.Helloworld">
 			<classpath path="test"></classpath>
@@ -8,4 +10,10 @@
 	<target name= "compile">
 		<javac includeantruntime="false" srcdir="./src" destdir = "test"></javac>
 	</target>
+	<target name="checkstyle">
+	  <checkstyle config="sun_checks.xml">
+		  <fileset dir="src/AntProject" includes="**/*.java"/>
+		  <formatter type="xml" toFile="checkstyle_errors.xml"/>
+	  </checkstyle>
+    </target>	  
 </project>
